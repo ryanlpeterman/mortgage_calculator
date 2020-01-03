@@ -119,8 +119,13 @@ if __name__ == "__main__":
     # if all_tests_passed:
     #     print("All tests passed!")
     #
-    plot_heatmaps()
+    # plot_heatmaps()
 
-    # print(calc_profit(loan_amt=510000, interest_rate=0.0325, loan_term=15, fixed_cost=0)/15)
-    # print(calc_profit(loan_amt=510000, interest_rate=0.0375, loan_term=30, fixed_cost=0)/30)
+    # print(calc_profit(loan_amt=250000, interest_rate=0.0325, loan_term=15, fixed_cost=0)/15)
+    # These are real aimloan rates
+    print(calc_profit(loan_amt=400000, interest_rate=0.0325, loan_term=30, fixed_cost=7754.50)/30)
+    print(calc_profit(loan_amt=400000, interest_rate=0.03375, loan_term=30, fixed_cost=5298.5)/30)
+    print(calc_profit(loan_amt=400000, interest_rate=0.035, loan_term=30, fixed_cost=3606.5)/30)
+    print(calc_profit(loan_amt=400000, interest_rate=0.03625, loan_term=30, fixed_cost=1106.50)/30)
+    print(calc_profit(loan_amt=400000, interest_rate=0.0375, loan_term=30, fixed_cost=0)/30)
     # print(calc_profit(loan_amt=510000, interest_rate=0.03625, loan_term=20, fixed_cost=0)/20)
