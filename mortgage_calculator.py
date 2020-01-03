@@ -10,7 +10,7 @@ def calc_profit(
     index_returns: float = 0.07,
 ):
     """ returns the increase on principle """
-    working_principle = loan_amt - fixed_cost
+    working_principle = loan_amt
     aggregate = 0
     r = interest_rate / 12
     n = loan_term * 12
@@ -33,14 +33,17 @@ def calc_profit(
         # amt paid in principle this month
         working_principle -= monthly_payment - interest_payment
 
-    return aggregate
+    # remove fixed costs less the opportunity cost of index returns
+    aggregate -= fixed_cost * (1 + index_returns) ** loan_term
+    return aggregate / loan_term
+
 
 def generate_profits(
     loan_amt_min: int,
     loan_amt_max: int,
     interest_rate_min: float,
     interest_rate_max: float,
-    loan_term:int,
+    loan_term: int,
 ):
     # convert to int so we can generate ranges easily
     interest_int_min = int(interest_rate_min * 10000)
@@ -61,12 +64,14 @@ def generate_profits(
                     interest_rate=interest_rate,
                     loan_term=loan_term,
                     fixed_cost=0,
-                )/loan_term
+                )
+                / loan_term
             )
 
         coords.append(col)
 
     return np.array(coords)
+
 
 def plot_heatmaps():
     min_loan = 300000
@@ -75,8 +80,12 @@ def plot_heatmaps():
     max_interest = 0.04
     xticklabels = range(min_loan, max_loan, 20000)
     yticklabels = range(int(min_interest * 10000), int(max_interest * 10000), 10)
-    loan_15_data = generate_profits(min_loan, max_loan, min_interest, max_interest, loan_term=15)
-    loan_30_data = generate_profits(min_loan, max_loan, min_interest, max_interest, loan_term=30)
+    loan_15_data = generate_profits(
+        min_loan, max_loan, min_interest, max_interest, loan_term=15
+    )
+    loan_30_data = generate_profits(
+        min_loan, max_loan, min_interest, max_interest, loan_term=30
+    )
     fig, axes = plt.subplots(nrows=2, figsize=(12, 12))
     ax1, ax2 = axes
 
@@ -84,8 +93,8 @@ def plot_heatmaps():
     vmin = min(np.amin(loan_15_data), np.amin(loan_30_data))
 
     # Heat maps.
-    im1 = ax1.matshow(loan_15_data, vmin=vmin, vmax=vmax,cmap='coolwarm')
-    im2 = ax2.matshow(loan_30_data, vmin=vmin, vmax=vmax,cmap='coolwarm')
+    im1 = ax1.matshow(loan_15_data, vmin=vmin, vmax=vmax, cmap="coolwarm")
+    im2 = ax2.matshow(loan_30_data, vmin=vmin, vmax=vmax, cmap="coolwarm")
 
     # Formatting for heat map 1.
     ax1.set_xticks(range(len(xticklabels)))
@@ -93,7 +102,7 @@ def plot_heatmaps():
     ax1.set_xticklabels(xticklabels)
     ax1.set_yticklabels(yticklabels)
     ax1.set_title("15 Year Loan", y=-0.1)
-    plt.setp(ax1.get_xticklabels(), rotation=45, ha='left', rotation_mode='anchor')
+    plt.setp(ax1.get_xticklabels(), rotation=45, ha="left", rotation_mode="anchor")
     plt.colorbar(im1, fraction=0.045, pad=0.05, ax=ax1)
 
     # Formatting for heat map 2.
@@ -102,11 +111,12 @@ def plot_heatmaps():
     ax2.set_xticklabels(xticklabels)
     ax2.set_yticklabels(yticklabels)
     ax2.set_title("30 Year Loan", y=-0.1)
-    plt.setp(ax2.get_xticklabels(), rotation=45, ha='left', rotation_mode='anchor')
+    plt.setp(ax2.get_xticklabels(), rotation=45, ha="left", rotation_mode="anchor")
     plt.colorbar(im2, fraction=0.045, pad=0.05, ax=ax2)
 
     fig.tight_layout()
     plt.show()
+
 
 if __name__ == "__main__":
     # # simple test suite
@@ -123,9 +133,27 @@ if __name__ == "__main__":
 
     # print(calc_profit(loan_amt=250000, interest_rate=0.0325, loan_term=15, fixed_cost=0)/15)
     # These are real aimloan rates
-    print(calc_profit(loan_amt=400000, interest_rate=0.0325, loan_term=30, fixed_cost=7754.50)/30)
-    print(calc_profit(loan_amt=400000, interest_rate=0.03375, loan_term=30, fixed_cost=5298.5)/30)
-    print(calc_profit(loan_amt=400000, interest_rate=0.035, loan_term=30, fixed_cost=3606.5)/30)
-    print(calc_profit(loan_amt=400000, interest_rate=0.03625, loan_term=30, fixed_cost=1106.50)/30)
-    print(calc_profit(loan_amt=400000, interest_rate=0.0375, loan_term=30, fixed_cost=0)/30)
+    print(
+        calc_profit(
+            loan_amt=400000, interest_rate=0.0325, loan_term=30, fixed_cost=7754.50
+        )
+    )
+    print(
+        calc_profit(
+            loan_amt=400000, interest_rate=0.03375, loan_term=30, fixed_cost=5298.5
+        )
+    )
+    print(
+        calc_profit(
+            loan_amt=400000, interest_rate=0.035, loan_term=30, fixed_cost=3606.5
+        )
+    )
+    print(
+        calc_profit(
+            loan_amt=400000, interest_rate=0.03625, loan_term=30, fixed_cost=1106.50
+        )
+    )
+    print(
+        calc_profit(loan_amt=400000, interest_rate=0.0375, loan_term=30, fixed_cost=0)
+    )
     # print(calc_profit(loan_amt=510000, interest_rate=0.03625, loan_term=20, fixed_cost=0)/20)
