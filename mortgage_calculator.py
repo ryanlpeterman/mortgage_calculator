@@ -7,7 +7,7 @@ def calc_profit(
     interest_rate: float,
     loan_term: int,
     fixed_cost: float,
-    index_returns: float = 0.07,
+    index_returns: float = 0.11,
 ):
     """ returns the increase on principle """
     working_principle = loan_amt
@@ -119,41 +119,56 @@ def plot_heatmaps():
 
 
 if __name__ == "__main__":
-    # # simple test suite
-    # all_tests_passed = True
-    # all_tests_passed &= (
-    #     calc_profit(loan_amt=510000, interest_rate=0.03125, loan_term=15, fixed_cost=0)
-    #     - 160564
-    #     < 1
-    # )
-    # if all_tests_passed:
-    #     print("All tests passed!")
-    #
+    # simple test suite
+    all_tests_passed = True
+    all_tests_passed &= (
+        calc_profit(loan_amt=510000, interest_rate=0.03125, loan_term=15, fixed_cost=0)
+        - 160564
+        < 1
+    )
+    if all_tests_passed:
+        print("All tests passed!")
+
     # plot_heatmaps()
 
-    # print(calc_profit(loan_amt=250000, interest_rate=0.0325, loan_term=15, fixed_cost=0)/15)
-    # These are real aimloan rates
+    # These are real rates I obtained during negotiations with loan estimates
     print(
+        "Aimloan",
         calc_profit(
-            loan_amt=400000, interest_rate=0.0325, loan_term=30, fixed_cost=7754.50
-        )
+            loan_amt=500000, interest_rate=0.03625, loan_term=30, fixed_cost=1037.50
+        ),
     )
     print(
+        "Aimloan",
+        calc_profit(loan_amt=500000, interest_rate=0.0375, loan_term=30, fixed_cost=0),
+    )
+    # sebonic financial
+    print(
+        "Sebonic",
         calc_profit(
-            loan_amt=400000, interest_rate=0.03375, loan_term=30, fixed_cost=5298.5
-        )
+            loan_amt=500000,
+            interest_rate=0.0349,
+            loan_term=30,
+            fixed_cost=1490 + 1100 + 450,
+        ),
     )
     print(
+        "Sebonic",
         calc_profit(
-            loan_amt=400000, interest_rate=0.035, loan_term=30, fixed_cost=3606.5
-        )
+            loan_amt=500000, interest_rate=0.03615, loan_term=30, fixed_cost=856
+        ),
     )
+
+    # quicken loan
     print(
+        "Quicken",
         calc_profit(
-            loan_amt=400000, interest_rate=0.03625, loan_term=30, fixed_cost=1106.50
-        )
+            loan_amt=515000, interest_rate=0.0375, loan_term=30, fixed_cost=1131
+        ),
     )
     print(
-        calc_profit(loan_amt=400000, interest_rate=0.0375, loan_term=30, fixed_cost=0)
+        "Quicken",
+        calc_profit(
+            loan_amt=515000, interest_rate=0.0375, loan_term=30, fixed_cost=-995.55
+        ),
     )
-    # print(calc_profit(loan_amt=510000, interest_rate=0.03625, loan_term=20, fixed_cost=0)/20)
