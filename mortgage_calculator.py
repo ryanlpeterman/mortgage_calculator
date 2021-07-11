@@ -19,7 +19,8 @@ def calc_profit(
     fixed_cost: float,
     index_returns: float = 0.11,
 ):
-    """ returns the increase on principle """
+    """Returns the projected profit per year from a cashout refinance invested
+    into index funds based off historical index returns"""
     working_principle = loan_amt
     aggregate = 0
     r = interest_rate / 12
@@ -55,6 +56,9 @@ def generate_profits(
     interest_rate_max: float,
     loan_term: int,
 ):
+    """generates a 2D array of all the projected profits
+    for all interest rates and loan amt pairs using the passed in
+    loan term"""
     # convert to int so we can generate ranges easily
     interest_int_min = int(interest_rate_min * 10000)
     interest_int_max = int(interest_rate_max * 10000)
@@ -84,6 +88,9 @@ def generate_profits(
 
 
 def plot_heatmaps():
+    """plots projected profits across reasonable ranges of interest rate
+    and loan amount per year for a 15/30 yr term for visualization of
+    all profit pairs"""
     min_loan = 300000
     max_loan = 1000000
     min_interest = 0.029
