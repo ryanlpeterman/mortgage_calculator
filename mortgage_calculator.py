@@ -147,7 +147,7 @@ def print_formated_profit(estimate: LoanEstimate) -> None:
     print(f"{estimate.company_name} {estimate.loan_term} year: ${profit:.2f}")
 
 
-def print_mortgage_2020() -> None:
+def print_refinance_2020() -> None:
     """These are real rates I obtained during negotiations with loan estimates in 2020.
     It was a cashout refi, credit score was >760 at the time if I recall correctly."""
 
@@ -200,6 +200,16 @@ def print_mortgage_2020() -> None:
         print_formated_profit(estimate)
 
 
+def print_refinance_2021():
+    """These are real rates I obtained during negotiations with loan estimates in 2021.
+    It was a cashout refi, credit score was ~768 at the time."""
+
+    estimates = []
+
+    for estimate in estimates:
+        print_formated_profit(estimate)
+
+
 if __name__ == "__main__":
     # simple test suite
     all_tests_passed = True
@@ -211,5 +221,6 @@ if __name__ == "__main__":
     if all_tests_passed:
         print("All tests passed!")
 
-    plot_heatmaps()
-    # print_mortgage_2020()
+    # plot_heatmaps()
+    # print_refinance_2020()
+    print_refinance_2021()
