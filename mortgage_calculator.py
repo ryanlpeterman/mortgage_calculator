@@ -1,5 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from dataclasses import dataclass
+
+
+@dataclass
+class LoanEstimate:
+    company_name: str
+    loan_amt: int
+    interest_rate: float
+    loan_term: int
+    fixed_cost: float
 
 
 def calc_profit(
@@ -117,49 +127,68 @@ def plot_heatmaps():
     fig.tight_layout()
     plt.show()
 
-def print_mortgage_2020():
-    """ These are real rates I obtained during negotiations with loan estimates in 2020.
-    It was a cashout refi, credit score was >760 at the time if I recall correctly. """
-    print(
-        "Aimloan",
-        calc_profit(
-            loan_amt=500000, interest_rate=0.03625, loan_term=30, fixed_cost=1037.50
+
+def print_formated_profit(estimate: LoanEstimate) -> None:
+    profit = calc_profit(
+        loan_amt=estimate.loan_amt,
+        interest_rate=estimate.interest_rate,
+        loan_term=estimate.loan_term,
+        fixed_cost=estimate.fixed_cost,
+    )
+    print(f"{estimate.company_name} {estimate.loan_term} year: ${profit:.2f}")
+
+
+def print_mortgage_2020() -> None:
+    """These are real rates I obtained during negotiations with loan estimates in 2020.
+    It was a cashout refi, credit score was >760 at the time if I recall correctly."""
+
+    estimates = [
+        LoanEstimate(
+            company_name="Aimloan",
+            loan_amt=500000,
+            interest_rate=0.03625,
+            loan_term=30,
+            fixed_cost=1037.50,
         ),
-    )
-    print(
-        "Aimloan",
-        calc_profit(loan_amt=500000, interest_rate=0.0375, loan_term=30, fixed_cost=0),
-    )
-    # sebonic financial
-    print(
-        "Sebonic",
-        calc_profit(
+        LoanEstimate(
+            company_name="Aimloan",
+            loan_amt=500000,
+            interest_rate=0.0375,
+            loan_term=30,
+            fixed_cost=0,
+        ),
+        LoanEstimate(
+            company_name="Sebonic",
             loan_amt=500000,
             interest_rate=0.0349,
             loan_term=30,
-            fixed_cost=1490 + 1100 + 450,
+            fixed_cost=3040,
         ),
-    )
-    print(
-        "Sebonic",
-        calc_profit(
-            loan_amt=500000, interest_rate=0.03615, loan_term=30, fixed_cost=856
+        LoanEstimate(
+            company_name="Sebonic",
+            loan_amt=500000,
+            interest_rate=0.03615,
+            loan_term=30,
+            fixed_cost=856,
         ),
-    )
+        LoanEstimate(
+            company_name="Quicken",
+            loan_amt=515000,
+            interest_rate=0.0375,
+            loan_term=30,
+            fixed_cost=1131,
+        ),
+        LoanEstimate(
+            company_name="Quicken",
+            loan_amt=515000,
+            interest_rate=0.0375,
+            loan_term=30,
+            fixed_cost=-995.55,
+        ),
+    ]
 
-    # quicken loan
-    print(
-        "Quicken",
-        calc_profit(
-            loan_amt=515000, interest_rate=0.0375, loan_term=30, fixed_cost=1131
-        ),
-    )
-    print(
-        "Quicken",
-        calc_profit(
-            loan_amt=515000, interest_rate=0.0375, loan_term=30, fixed_cost=-995.55
-        ),
-    )
+    for estimate in estimates:
+        print_formated_profit(estimate)
 
 
 if __name__ == "__main__":
