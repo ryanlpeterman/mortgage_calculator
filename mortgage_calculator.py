@@ -117,21 +117,9 @@ def plot_heatmaps():
     fig.tight_layout()
     plt.show()
 
-
-if __name__ == "__main__":
-    # simple test suite
-    all_tests_passed = True
-    all_tests_passed &= (
-        calc_profit(loan_amt=510000, interest_rate=0.03125, loan_term=15, fixed_cost=0)
-        - 160564
-        < 1
-    )
-    if all_tests_passed:
-        print("All tests passed!")
-
-    # plot_heatmaps()
-
-    # These are real rates I obtained during negotiations with loan estimates
+def print_mortgage_2020():
+    """ These are real rates I obtained during negotiations with loan estimates in 2020.
+    It was a cashout refi, credit score was >760 at the time if I recall correctly. """
     print(
         "Aimloan",
         calc_profit(
@@ -172,3 +160,18 @@ if __name__ == "__main__":
             loan_amt=515000, interest_rate=0.0375, loan_term=30, fixed_cost=-995.55
         ),
     )
+
+
+if __name__ == "__main__":
+    # simple test suite
+    all_tests_passed = True
+    all_tests_passed &= (
+        calc_profit(loan_amt=510000, interest_rate=0.03125, loan_term=15, fixed_cost=0)
+        - 160564
+        < 1
+    )
+    if all_tests_passed:
+        print("All tests passed!")
+
+    # plot_heatmaps()
+    print_mortgage_2020()
