@@ -95,8 +95,10 @@ def plot_heatmaps():
     max_loan = 1000000
     min_interest = 0.029
     max_interest = 0.04
-    xticklabels = range(min_loan, max_loan, 20000)
-    yticklabels = range(int(min_interest * 10000), int(max_interest * 10000), 10)
+    xtick_ints = range(min_loan, max_loan, 20000)
+    xticklabels = [f"${num}" for num in xtick_ints]
+    ytick_ints = range(int(min_interest * 10000), int(max_interest * 10000), 10)
+    yticklabels = [f"{num/100}%" for num in ytick_ints]
     loan_15_data = generate_profits(
         min_loan, max_loan, min_interest, max_interest, loan_term=15
     )
@@ -209,5 +211,5 @@ if __name__ == "__main__":
     if all_tests_passed:
         print("All tests passed!")
 
-    # plot_heatmaps()
-    print_mortgage_2020()
+    plot_heatmaps()
+    # print_mortgage_2020()
