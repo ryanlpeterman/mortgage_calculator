@@ -233,16 +233,6 @@ def print_refinance_2021():
 
 
 if __name__ == "__main__":
-    # simple test suite
-    all_tests_passed = True
-    all_tests_passed &= (
-        calc_profit(loan_amt=510000, interest_rate=0.03125, loan_term=15, fixed_cost=0)
-        - 160564
-        < 1
-    )
-    if all_tests_passed:
-        print("All tests passed!")
-
     # plot_heatmaps()
     # print_refinance_2020()
     print_refinance_2021()
