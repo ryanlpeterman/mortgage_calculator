@@ -204,7 +204,29 @@ def print_refinance_2021():
     """These are real rates I obtained during negotiations with loan estimates in 2021.
     It was a cashout refi, credit score was ~768 at the time."""
 
-    estimates = []
+    estimates = [
+        LoanEstimate(
+            company_name="Better 750k, 5%",
+            loan_amt=750000,
+            interest_rate=0.05,
+            loan_term=30,
+            fixed_cost=8906,
+        ),
+        LoanEstimate(
+            company_name="Better 500k, 3.75%",
+            loan_amt=750000,
+            interest_rate=0.0375,
+            loan_term=30,
+            fixed_cost=8161,
+        ),
+        LoanEstimate(
+            company_name="Quicken 550k, 3.75%",
+            loan_amt=548250,
+            interest_rate=0.0375,
+            loan_term=30,
+            fixed_cost=18851,
+        ),
+    ]
 
     for estimate in estimates:
         print_formated_profit(estimate)
