@@ -213,11 +213,32 @@ def print_refinance_2021():
             fixed_cost=8906,
         ),
         LoanEstimate(
-            company_name="Better 500k, 3.75%",
+            company_name="Better 548k, 3.375%",
+            loan_amt=548000,
+            interest_rate=0.03375,
+            loan_term=30,
+            fixed_cost=7232,
+        ),
+        LoanEstimate(
+            company_name="Better 548k, 2.875%",
+            loan_amt=548000,
+            interest_rate=0.02875,
+            loan_term=30,
+            fixed_cost=17677,
+        ),
+        LoanEstimate(
+            company_name="Better 548k, 3.75%",
+            loan_amt=548000,
+            interest_rate=0.0375,
+            loan_term=15,
+            fixed_cost=7630,
+        ),
+        LoanEstimate(
+            company_name="Better 750k, 3.75%",
             loan_amt=750000,
             interest_rate=0.0375,
             loan_term=30,
-            fixed_cost=8161,
+            fixed_cost=18235,
         ),
         LoanEstimate(
             company_name="Quicken 550k, 3.75%",
@@ -225,6 +246,20 @@ def print_refinance_2021():
             interest_rate=0.0375,
             loan_term=30,
             fixed_cost=18851,
+        ),
+        LoanEstimate(
+            company_name="Chase (unofficial) 506k, 3.125%",
+            loan_amt=506674,
+            interest_rate=0.03125,
+            loan_term=30,
+            fixed_cost=9417,
+        ),
+        LoanEstimate(
+            company_name="Chase (unofficial) 506k, 3.49%",
+            loan_amt=506674,
+            interest_rate=0.0349,
+            loan_term=30,
+            fixed_cost=2714,
         ),
     ]
 
